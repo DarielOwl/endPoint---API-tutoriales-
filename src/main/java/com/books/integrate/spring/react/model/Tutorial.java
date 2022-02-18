@@ -29,6 +29,7 @@ public class Tutorial {
 		this.published = published;
 	}
 
+	//Getters
 	public long getId() {
 		return id;
 	}
@@ -37,21 +38,21 @@ public class Tutorial {
 		return title;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
 	public String getDescription() {
 		return description;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public boolean isPublished() {
+		return published;
 	}
 
-	public boolean isPublished() {
+	//Setters
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-		return published;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public void setPublished(boolean isPublished) {
@@ -59,6 +60,7 @@ public class Tutorial {
 		this.published = isPublished;
 	}
 
+	//Another Function
 	@Override
 	public String toString() {
 		return "Tutorial [id=" + id + ", title=" + title + ", desc=" + description + ", published=" + published + "]";

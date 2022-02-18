@@ -122,4 +122,35 @@ public class TutorialController {
 		}
 	}
 
+	//Eliminar Tutorial por Titulo
+	@DeleteMapping("/tutorials/eliminar/{title}")
+	public ResponseEntity<String> deleteTutorial_Title(@PathVariable("title") String title) {
+		try {
+				Tutorial tutorial = tutorialRepository.findByTitle(title); //Buscamos el objeto por tiutlo
+				tutorialRepository.deleteById(tutorial.getId()); //Eliminar por ID del titulo que queremos
+
+				return new ResponseEntity<>("Tutorials DELETE!! ",HttpStatus.NO_CONTENT);
+			} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+		}
+	}
+	
+	//Buscar por titulo
+	@GetMapping("/tutorials/buscar/{title}")
+	public ResponseEntity<Tutorial> findByTitle(@PathVariable("title") String title) {
+		try {
+			
+			//Buscar y retornar objeto titulo
+			Tutorial tutorial = tutorialRepository.findByTitle(title);
+			
+			if (tutorial == null)  //Si esta vacio el objeto
+				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			
+			return new ResponseEntity<>(tutorial, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+		}
+	}
+
+
 }
