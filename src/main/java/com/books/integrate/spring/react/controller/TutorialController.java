@@ -152,5 +152,24 @@ public class TutorialController {
 		}
 	}
 
+	//Actualizar Tutorial por Titulo
+	@PutMapping("/tutorials/actualizar/{title}")
+	public ResponseEntity<Tutorial> updateTutorial(@PathVariable("title") String title, @RequestBody Tutorial tutorial) {
+		
+		//Una lista de contenedores nulos
+		Optional<Tutorial> tutorialData = Optional.ofNullable(tutorialRepository.findByTitle(title)); 
+
+		if (tutorialData.isPresent()) { //Si existe el valor
+
+			Tutorial tutorialNuevo = tutorialData.get();
+			tutorialNuevo.setTitle(tutorial.getTitle());
+			tutorialNuevo.setDescription(tutorial.getDescription());
+			tutorialNuevo.setPublished(tutorial.isPublished());
+			return new ResponseEntity<>(tutorialRepository.save(tutorialNuevo), HttpStatus.OK);
+		}
+		else { 
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
 
 }
